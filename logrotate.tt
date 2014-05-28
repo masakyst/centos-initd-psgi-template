@@ -1,0 +1,10 @@
+[% appdir %]/logs/production.log {
+    dateext
+    missingok
+    notifempty
+    sharedscripts
+    delaycompress
+    postrotate
+        /sbin/service [% appname %] restart > /dev/null 2>/dev/null || true
+    endscript
+}
