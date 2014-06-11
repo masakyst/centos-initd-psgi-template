@@ -24,6 +24,7 @@ export PATH=$PERLBREW_HOME/perl5/perlbrew/perls/$PERL_VERSION/bin:$PATH
 UNIXNAME=$(echo $APPNAME | perl -pe 's/::/_/;$_=lc')
 # PSGIFILE=$UNIXNAME.psgi
 PIDFILE=/var/run/$UNIXNAME/$UNIXNAME.pid
+LOCKFILE=/var/lock/subsys/$UNIXNAME
 
 RETVAL=0
 
@@ -36,8 +37,8 @@ start() {
     su $USER -c "cd $APPDIR; carton exec starman --env=$PLACK_ENV --pid=$PIDFILE --port $PORT --daemonize $PSGIFILE"
     RETVAL=$?
     if [ $RETVAL -eq 0 ] ; then
+        touch $LOCKFILE
         echo_success
-    #    touch /var/lock/subsys/$prog
     else
         echo_failure
     fi
@@ -56,7 +57,7 @@ stop() {
     su $USER -c "kill -TERM `cat $PIDFILE`"
     RETVAL=$?
     if [ $RETVAL -eq 0 ] ; then
-        rm -f $PIDFILE
+        rm -f $PIDFILE $LOCKFILE
         echo_success
     else
         echo_failure
