@@ -5,6 +5,6 @@
     sharedscripts
     delaycompress
     postrotate
-        /sbin/service [% appname %] restart > /dev/null 2>/dev/null || true
+        /sbin/service [% prog_name %] restart > /dev/null 2>/dev/null || true
     endscript
 }

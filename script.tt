@@ -21,7 +21,7 @@ PERL_VERSION=[% perl_version %]
 PERLBREW_HOME=[% perlbrew_home %]
 export PATH=$PERLBREW_HOME/perl5/perlbrew/perls/$PERL_VERSION/bin:$PATH
 
-UNIXNAME=$(echo $APPNAME | perl -pe 's/::/_/;$_=lc')
+UNIXNAME=$(echo $APPNAME | perl -pe 's/::/\-/;$_=lc')
 # PSGIFILE=$UNIXNAME.psgi
 PIDFILE=/var/run/$UNIXNAME/$UNIXNAME.pid
 LOCKFILE=/var/lock/subsys/$UNIXNAME
