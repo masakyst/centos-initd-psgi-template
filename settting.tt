@@ -1,0 +1,9 @@
+#!/bin/sh
+
+PLACK_ENV=[% plack_env %]
+USER=[% user %]
+GROUP=[% group %]
+
+PERL_VERSION=[% perl_version %]
+PERLBREW_HOME=[% perlbrew_home %]
+export PATH=$PERLBREW_HOME/perl5/perlbrew/perls/$PERL_VERSION/bin:$PATH

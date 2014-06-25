@@ -6,23 +6,16 @@
 # Source function library.
 . /etc/rc.d/init.d/functions
 
+# Environment setting
+. [% appdir %]/init.d/setting
 
 # Application Settings
-PLACK_ENV=production
 APPNAME=[% appname %]
 APPDIR=[% appdir %]
-USER=[% user %]
-GROUP=[% group %]
 PSGIFILE="[% psgifile %]"
 PORT=[% port %]
 
-# Server side perlbrew path
-PERL_VERSION=[% perl_version %]
-PERLBREW_HOME=[% perlbrew_home %]
-export PATH=$PERLBREW_HOME/perl5/perlbrew/perls/$PERL_VERSION/bin:$PATH
-
 UNIXNAME=$(echo $APPNAME | perl -pe 's/::/\-/;$_=lc')
-# PSGIFILE=$UNIXNAME.psgi
 PIDFILE=/var/run/$UNIXNAME/$UNIXNAME.pid
 LOCKFILE=/var/lock/subsys/$UNIXNAME
 

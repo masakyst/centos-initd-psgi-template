@@ -1,4 +1,6 @@
-[% appdir %]/logs/production.log {
+[% appdir %]/logs/*.log {
+    daily
+    rotate 20
     dateext
     missingok
     notifempty
